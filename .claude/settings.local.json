@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(cd C:\\\\Users\\\\admin\\\\Downloads\\\\thesonflower_vercel\\\\sonflower *)",
+      "Bash(python _comm_tmp.py)",
+      "Bash(python _check_tmp.py)",
+      "Bash(rm _check_tmp.py)"
+    ]
+  }
+}
