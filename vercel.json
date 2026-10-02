@@ -1,103 +1,13 @@
 {
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/about",
-      "destination": "/about.html"
-    },
-    {
-      "source": "/contact",
-      "destination": "/contact.html"
-    },
-    {
-      "source": "/series",
-      "destination": "/series.html"
-    },
-    {
-      "source": "/nine-doors",
-      "destination": "/nine-doors.html"
-    },
-    {
-      "source": "/community",
-      "destination": "/community.html"
-    },
-    {
-      "source": "/donate",
-      "destination": "/donate.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/blog.html"
-    },
-    {
-      "source": "/quiz",
-      "destination": "/quiz.html"
-    },
-    {
-      "source": "/blog/lucid-dreaming-obe-astral",
-      "destination": "/blog/lucid-dreaming-obe-astral.html"
-    },
-    {
-      "source": "/blog/wbtb-lucid-dreaming",
-      "destination": "/blog/wbtb-lucid-dreaming.html"
-    },
-    {
-      "source": "/blog/monroe-institute-gateway",
-      "destination": "/blog/monroe-institute-gateway.html"
-    },
-    {
-      "source": "/blog/jesus-life-after-death",
-      "destination": "/blog/jesus-life-after-death.html"
-    },
-    {
-      "source": "/blog/spirituality-without-religion",
-      "destination": "/blog/spirituality-without-religion.html"
-    },
-    {
-      "source": "/blog/does-god-exist-atheist",
-      "destination": "/blog/does-god-exist-atheist.html"
-    },
-    {
-      "source": "/blog/why-the-bear",
-      "destination": "/blog/why-the-bear.html"
-    },
-    {
-      "source": "/blog/left-the-church",
-      "destination": "/blog/left-the-church.html"
-    },
-    {
-      "source": "/blog/tibetan-dream-yoga",
-      "destination": "/blog/tibetan-dream-yoga.html"
-    },
-    {
-      "source": "/blog/sin-missing-the-mark",
-      "destination": "/blog/sin-missing-the-mark.html"
-    },
-    {
-      "source": "/blog/nine-doors-guide",
-      "destination": "/blog/nine-doors-guide.html"
-    }
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/:path((?!images/|video/|favicon).+)", "destination": "/", "permanent": false }
   ],
   "headers": [
     {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
+      "source": "/(images|video)/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     }
   ]
 }

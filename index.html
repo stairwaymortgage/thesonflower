@@ -1,64 +1,672 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home — The SonFlower and the Bear</title>
-<link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Sonflower and the Bear · The Third Testament</title>
+<meta name="description" content="The Sonflower and the Bear is a thirteen-book story of a love older than every religion. Get Chapter One free.">
+<meta property="og:title" content="The Sonflower and the Bear">
+<meta property="og:description" content="Thirteen books. One thread. Get Chapter One free.">
+<meta property="og:image" content="https://thesonflower.com/images/og-image.jpg">
+<meta property="og:url" content="https://thesonflower.com">
+<meta name="theme-color" content="#1A0A2E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23F2A800'%3E%3Cellipse cx='12' cy='4' rx='1.6' ry='3.4'/%3E%3Cellipse cx='12' cy='4' rx='1.6' ry='3.4' transform='rotate(45 12 12)'/%3E%3Cellipse cx='12' cy='4' rx='1.6' ry='3.4' transform='rotate(90 12 12)'/%3E%3Cellipse cx='12' cy='4' rx='1.6' ry='3.4' transform='rotate(135 12 12)'/%3E%3Cellipse cx='12' cy='4' rx='1.6' ry='3.4' transform='rotate(180 12 12)'/%3E%3Cellipse cx='12' cy='4' rx='1.6' ry='3.4' transform='rotate(225 12 12)'/%3E%3Cellipse cx='12' cy='4' rx='1.6' ry='3.4' transform='rotate(270 12 12)'/%3E%3Cellipse cx='12' cy='4' rx='1.6' ry='3.4' transform='rotate(315 12 12)'/%3E%3C/g%3E%3Ccircle cx='12' cy='12' r='4' fill='%231A0A2E'/%3E%3C/svg%3E">
+
+<style>
+/* ─────────────────────────────────────────────────────────────
+   SETTINGS — the only things you should ever need to edit
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --night:   #12061F;   /* deepest background */
+  --purple:  #1A0A2E;   /* brand dark purple */
+  --plum:    #241040;   /* raised panels */
+  --gold:    #F2A800;   /* brand gold */
+  --cream:   #F5F0E8;   /* all body text */
+  --cherry:  #6B1728;   /* accent */
+  --serif:   Georgia, "Times New Roman", serif;
+  color-scheme: dark;
+  --sans:    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--night);
+  color: var(--cream);
+  font-family: var(--sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Shared ── */
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.serif { font-family: var(--serif); font-weight: normal; }
+.gold { color: var(--gold); }
+.sigil { display: block; margin: 0 auto; }
+
+/* ── Signup form ── */
+.signup { width: 100%; max-width: 440px; margin: 0 auto; }
+.signup-row {
+  display: flex;
+  gap: 8px;
+  background: rgba(245,240,232,.06);
+  border: 1px solid rgba(242,168,0,.45);
+  border-radius: 999px;
+  padding: 6px;
+}
+.signup input[type=email] {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--cream);
+  font: 16px var(--sans);           /* 16px stops iOS zoom */
+  padding: 12px 16px;
+}
+.signup input[type=email]::placeholder { color: rgba(245,240,232,.6); }
+.signup button {
+  background: var(--gold);
+  color: var(--purple);
+  border: 0;
+  border-radius: 999px;
+  font: 600 15px var(--sans);
+  padding: 12px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform .15s, background .15s;
+}
+.signup button:hover { background: #FFB91F; }
+.signup button:active { transform: scale(.97); }
+.signup button:disabled { opacity: .6; cursor: default; }
+.signup-row:focus-within { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(242,168,0,.18); }
+.signup-note {
+  font-size: 13px;
+  color: rgba(245,240,232,.75);
+  text-align: center;
+  margin-top: 12px;
+}
+.signup-msg {
+  display: none;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--cream);
+  padding: 14px 0 4px;
+}
+.signup.done .signup-row,
+.signup.done .signup-note { display: none; }
+.signup.done .signup-msg { display: block; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* ── 1. Hero ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: center;
+  padding: 96px 0 56px;
+  overflow: hidden;
+  background:
+    url('images/hero-poster.jpg') center / cover no-repeat,
+    radial-gradient(ellipse at 50% 40%, #3A1A5E 0%, var(--purple) 55%, var(--night) 100%);
+}
+/* Silent trailer loop behind the headline */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(18,6,31,.35) 0%, rgba(18,6,31,.10) 30%, rgba(18,6,31,.70) 62%, var(--night) 100%);
+}
+.hero-top, .hero .wrap { position: relative; z-index: 2; }
+.hero-top { position: absolute; }
+/* Trailer player controls (bottom of the hero) */
+.player-bar {
+  position: absolute;
+  z-index: 3;
+  left: 0; right: 0; bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 24px;
+  pointer-events: none;
+}
+.player-bar > * { pointer-events: auto; }
+.chips { display: flex; gap: 6px; }
+.chip, .ctrl {
+  background: rgba(18,6,31,.55);
+  border: 1px solid rgba(245,240,232,.35);
+  color: var(--cream);
+  border-radius: 999px;
+  font: 500 13px var(--sans);
+  letter-spacing: .03em;
+  padding: 8px 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.chip:hover, .ctrl:hover, .chip:focus-visible, .ctrl:focus-visible { border-color: var(--gold); color: var(--gold); outline: none; }
+.chip[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--purple); }
+.ctrls { display: flex; gap: 6px; }
+.ctrl.sound-off { border-color: var(--gold); color: var(--gold); }
+.ctrl svg { display: block; }
+.ctrl .lbl { white-space: nowrap; }
+@media (max-width: 640px) {
+  .player-bar { bottom: 12px; padding: 0 16px; }
+  .chip, .ctrl { padding: 7px 11px; font-size: 12px; }
+  .hero { padding-bottom: 76px; }
+}
+.hero-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.hero-top span {
+  font-family: var(--serif);
+  font-size: 15px;
+  letter-spacing: .04em;
+  color: var(--cream);
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: normal;
+  font-size: clamp(40px, 9vw, 76px);
+  line-height: 1.05;
+  margin: 18px 0 20px;
+  text-shadow: 0 2px 30px rgba(0,0,0,.5);
+}
+.hero h1 em { font-style: normal; color: var(--gold); display: block; }
+.hero .sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(18px, 3.6vw, 22px);
+  line-height: 1.5;
+  max-width: 520px;
+  margin: 0 auto 34px;
+}
+
+/* ── 2. The Mother ── */
+.mother {
+  padding: 120px 0;
+  text-align: center;
+  background: var(--night);
+}
+.mother p {
+  font-family: var(--serif);
+  font-size: clamp(26px, 5.6vw, 40px);
+  line-height: 1.35;
+}
+.mother p + p { margin-top: 26px; }
+.mother p.last { color: var(--gold); }
+.thread {
+  width: 1px;
+  height: 72px;
+  margin: 0 auto 48px;
+  background: linear-gradient(var(--night), var(--gold));
+}
+
+/* ── 3. The Shape ── */
+.shape {
+  padding: 110px 0 100px;
+  background: linear-gradient(180deg, var(--night) 0%, var(--purple) 100%);
+}
+.shape-head { text-align: center; margin-bottom: 48px; }
+.shape-head h2 {
+  font-family: var(--serif);
+  font-weight: normal;
+  font-size: clamp(28px, 5vw, 38px);
+  margin-top: 12px;
+}
+.breaths {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.breath {
+  border: 1px solid rgba(242,168,0,.28);
+  border-radius: 14px;
+  padding: 36px 30px 32px;
+  background: rgba(245,240,232,.03);
+}
+.breath .eyebrow { font-size: 11px; }
+.breath h3 {
+  font-family: var(--serif);
+  font-weight: normal;
+  font-size: 30px;
+  margin: 10px 0 14px;
+}
+.breath p { font-size: 17px; line-height: 1.65; }
+.titles {
+  max-width: 960px;
+  margin: 56px auto 0;
+  padding: 0 24px;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 2.1;
+  color: var(--cream);
+}
+.titles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 0;
+  row-gap: 2px;
+}
+.titles span { white-space: nowrap; }
+.titles i { font-style: normal; color: var(--gold); padding: 0 10px; }
+
+/* ── 4. Middle signup ── */
+.join {
+  padding: 96px 0;
+  text-align: center;
+  background: var(--purple);
+  border-top: 1px solid rgba(242,168,0,.18);
+  border-bottom: 1px solid rgba(242,168,0,.18);
+}
+.join h2 {
+  font-family: var(--serif);
+  font-weight: normal;
+  font-size: clamp(26px, 4.6vw, 34px);
+  line-height: 1.3;
+  margin: 12px auto 30px;
+  max-width: 560px;
+}
+
+/* ── 5. One line ── */
+.line {
+  padding: 140px 0;
+  text-align: center;
+  background: var(--night);
+}
+.line blockquote {
+  font-family: var(--serif);
+  font-size: clamp(30px, 6.4vw, 52px);
+  line-height: 1.25;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ── 6. Closing ── */
+.close {
+  padding: 120px 0 110px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(242,168,0,.10) 0%, transparent 60%),
+    var(--purple);
+}
+.close p.couplet {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(24px, 4.8vw, 34px);
+  line-height: 1.45;
+  margin: 28px 0 40px;
+}
+
+/* ── Footer ── */
+footer {
+  padding: 40px 24px 48px;
+  text-align: center;
+  background: var(--night);
+  font-size: 13px;
+  color: rgba(245,240,232,.75);
+  line-height: 1.9;
+}
+footer a { color: var(--cream); text-decoration: none; border-bottom: 1px solid rgba(245,240,232,.3); }
+footer a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .breaths { grid-template-columns: 1fr; }
+  .signup-row { flex-direction: column; border-radius: 16px; padding: 8px; }
+  .signup button { padding: 14px 20px; border-radius: 10px; }
+  .signup input[type=email] { text-align: center; }
+  .mother { padding: 96px 0; }
+  .line { padding: 110px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+</style>
 </head>
 <body>
-<div id="nav-placeholder"></div>
-<div id="banner-placeholder"></div>
-<div id="modal-placeholder"></div>
 
-<section class="page-hero">
-  <div class="page-hero-inner">
-    <div class="hero-eyebrow">The Golden Thread</div>
-    <h1 class="hero-headline">Nine doors.<br><span>One room.</span><br>Which door is yours?</h1>
-    <p class="hero-sub">There is something you have felt your whole life that you have never been able to name. The thread is real. It runs through every tradition on earth. One of nine doors leads directly to where you already stand.</p>
-    <div class="hero-btns">
-      <a class="btn-primary" href="/quiz">Find your door →</a>
-      <a class="btn-ghost" onclick="openModal()">Join the waitlist</a>
+<!-- ═════════ 1. HERO ═════════ -->
+<header class="hero">
+  <video class="hero-video" id="heroVideo" autoplay muted playsinline preload="auto" poster="images/hero-poster.jpg" aria-label="The Sonflower and the Bear trailers"></video>
+  <div class="hero-top">
+    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+      <g fill="#F2A800">
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(45 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(90 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(135 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(180 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(225 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(270 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(315 12 12)"/>
+      </g>
+      <circle cx="12" cy="12" r="4.4" fill="#1A0A2E"/>
+      <circle cx="12" cy="12" r="0.75" fill="#F2A800" opacity="0.95"/>
+      <circle cx="12" cy="10" r="0.6" fill="#F2A800" opacity="0.8"/>
+      <circle cx="13.7" cy="11" r="0.6" fill="#F2A800" opacity="0.8"/>
+      <circle cx="13.7" cy="13" r="0.6" fill="#F2A800" opacity="0.8"/>
+      <circle cx="12" cy="14" r="0.6" fill="#F2A800" opacity="0.8"/>
+      <circle cx="10.3" cy="13" r="0.6" fill="#F2A800" opacity="0.8"/>
+      <circle cx="10.3" cy="11" r="0.6" fill="#F2A800" opacity="0.8"/>
+    </svg>
+    <span>The Sonflower and the Bear</span>
+  </div>
+
+  <div class="wrap">
+    <div class="eyebrow">The Third Testament</div>
+    <h1>Thirteen books.<em>One thread.</em></h1>
+    <p class="sub">They've been selling you a key to a door that was never locked.</p>
+
+    <form class="signup" data-placement="hero" novalidate>
+      <div class="signup-row">
+        <input type="email" name="email_address" placeholder="Your email" autocomplete="email" required aria-label="Email address">
+        <button type="submit">Send me Chapter One</button>
+      </div>
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="signup-note">Free. Chapter One of Book One, <em>The Still Pond</em>. No spam, ever.</p>
+      <p class="signup-msg" role="status">Thank you. Check your inbox for Chapter One.</p>
+    </form>
+  </div>
+
+  <div class="player-bar" id="playerBar">
+    <div class="chips" role="group" aria-label="Choose a trailer">
+      <button class="chip" type="button" data-t="0" aria-pressed="true">The Heart</button>
+      <button class="chip" type="button" data-t="1" aria-pressed="false">The Storm</button>
+    </div>
+    <div class="ctrls">
+      <button class="ctrl" id="pauseBtn" type="button" aria-label="Pause">
+        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
+      </button>
+      <button class="ctrl sound-off" id="soundBtn" type="button" aria-pressed="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="waves" d="M16 9c1.2 1.6 1.2 4.4 0 6M18.5 6.5c2.6 3.2 2.6 7.8 0 11" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".35"/></svg>
+        <span class="lbl">Sound on</span>
+      </button>
     </div>
   </div>
-</section>
+</header>
 
-<section class="doors-section">
-  <div class="section-eyebrow">The Nine Doors Home</div>
-  <h2 class="section-title">Every tradition. Every doubt. Every question.</h2>
-  <p class="section-desc">Nine conversations with the Old Man. Each one begins exactly where you stand. One of them was written for you.</p>
-  <div class="doors-grid">
-    <div class="door-card"><div class="door-symbol-circle"><span class="door-symbol-text">✝</span></div><div class="door-name">The Christian</div><div class="door-hint">How does the thread fit with Jesus?</div></div>
-    <div class="door-card"><div class="door-symbol-circle"><span class="door-symbol-text">☪</span></div><div class="door-name">The Muslim</div><div class="door-hint">Does the thread honor what you practice?</div></div>
-    <div class="door-card"><div class="door-symbol-circle"><span class="door-symbol-text">✡</span></div><div class="door-name">The Jewish Reader</div><div class="door-hint">You carried the Name first.</div></div>
-    <div class="door-card"><div class="door-symbol-circle"><span class="door-symbol-text sm">ॐ</span></div><div class="door-name">The Hindu</div><div class="door-hint">The I AM and Brahman.</div></div>
-    <div class="door-card"><div class="door-symbol-circle"><span class="door-symbol-text">☸</span></div><div class="door-name">The Buddhist</div><div class="door-hint">Connection without attachment?</div></div>
-    <div class="door-card"><div class="door-symbol-circle"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="11" stroke="#F2A800" stroke-width="1.5" fill="none"/><line x1="13" y1="2" x2="13" y2="24" stroke="#F2A800" stroke-width="1.5"/><line x1="2" y1="13" x2="24" y2="13" stroke="#F2A800" stroke-width="1.5"/><circle cx="13" cy="13" r="3" fill="#F2A800"/></svg></div><div class="door-name">The Indigenous</div><div class="door-hint">Your people knew first.</div></div>
-    <div class="door-card"><div class="door-symbol-circle"><span class="door-symbol-text sm">⚛</span></div><div class="door-name">The Atheist</div><div class="door-hint">Follow the data. All of it.</div></div>
-    <div class="door-card"><div class="door-symbol-circle"><span class="door-symbol-text">∞</span></div><div class="door-name">The Seeker</div><div class="door-hint">Time to weave.</div></div>
-    <div class="door-card"><div class="door-symbol-circle" style="background:#3A2550;"><span class="door-symbol-text" style="font-size:26px;color:#9B7FD4;">?</span></div><div class="door-name">The Indifferent</div><div class="door-hint">Not religious. Still here.</div></div>
-  </div>
-  <a class="door-quiz-cta" href="/quiz">
-    <div><div class="cta-title">Not sure which door is yours? Take the quiz.</div><div class="cta-sub">12 questions. Your door is waiting.</div></div>
-    <div class="door-cta-arrow">→</div>
-  </a>
-</section>
 
-<section class="community-strip">
-  <h2 class="community-title">The Golden Thread Community</h2>
-  <p class="community-desc">Free. No membership fees. No toll booths. Just people who followed the thread and want to talk about where it led. Every door. One room.</p>
-  <a class="community-btn" href="/community">Join the community →</a>
-</section>
-
-<section class="series-strip">
-  <div class="series-strip-inner">
-    <div><div class="series-strip-title">The SonFlower and the Bear</div><p class="series-strip-desc">A 13-book spiritual epic. 1.26 million words. 25 years in the making.</p></div>
-    <a class="series-strip-btn" href="/series">Discover the series →</a>
+<!-- ═════════ 2. THE MOTHER ═════════ -->
+<section class="mother" aria-label="The Mother">
+  <div class="thread" aria-hidden="true"></div>
+  <div class="wrap">
+    <p>A mother.</p>
+    <p>A daughter taken from her at three days old.</p>
+    <p>A lifetime apart.</p>
+    <p class="last">Neither one ever stopped reaching.</p>
   </div>
 </section>
 
-<div id="footer-placeholder"></div>
-<script src="js/components.js"></script>
-<script src="js/main.js"></script>
+<!-- ═════════ 3. THE SHAPE ═════════ -->
+<section class="shape" aria-labelledby="shape-h">
+  <div class="shape-head wrap">
+    <div class="eyebrow">The series</div>
+    <h2 id="shape-h">Two movements. One breath.</h2>
+  </div>
+
+  <div class="breaths">
+    <article class="breath">
+      <div class="eyebrow">Books 1–9</div>
+      <h3>The Breath Out</h3>
+      <p>The village. The Fork. The War. The human world.</p>
+    </article>
+    <article class="breath">
+      <div class="eyebrow">Books 10–13</div>
+      <h3>The Breath In</h3>
+      <p>The silence. The eternal. The realms. The return.</p>
+    </article>
+  </div>
+
+  <p class="titles" aria-label="The thirteen books">
+    <span>The Calling</span><i>·</i><span>The Testing</span><i>·</i><span>The Breaking</span><i>·</i><span>The Weaving</span><i>·</i><span>The Knowing</span><i>·</i><span>The Standing</span><i>·</i><span>The Sending</span><i>·</i><span>The Fork</span><i>·</i><span>The War</span><i>·</i><span>The Silence</span><i>·</i><span>The Eternal</span><i>·</i><span>The Realms</span><i>·</i><span>The Return</span>
+  </p>
+</section>
+
+<!-- ═════════ 4. MIDDLE SIGNUP ═════════ -->
+<section class="join" aria-labelledby="join-h">
+  <div class="wrap">
+    <div class="eyebrow">Be the first to know</div>
+    <h2 id="join-h">Chapter One free, and the first to know when the books and the songs arrive.</h2>
+    <form class="signup" data-placement="middle" novalidate>
+      <div class="signup-row">
+        <input type="email" name="email_address" placeholder="Your email" autocomplete="email" required aria-label="Email address">
+        <button type="submit">Send me Chapter One</button>
+      </div>
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="signup-msg" role="status">Thank you. Check your inbox for Chapter One.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ═════════ 5. ONE LINE ═════════ -->
+<section class="line" aria-label="From the books">
+  <div class="wrap">
+    <blockquote>You cannot lose what you are made of.</blockquote>
+  </div>
+</section>
+
+<!-- ═════════ 6. CLOSING ═════════ -->
+<section class="close" aria-label="Join">
+  <div class="wrap">
+    <svg class="sigil" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
+      <g fill="#F2A800">
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(45 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(90 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(135 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(180 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(225 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(270 12 12)"/>
+        <ellipse cx="12" cy="3.6" rx="1.7" ry="3.4" transform="rotate(315 12 12)"/>
+      </g>
+      <circle cx="12" cy="12" r="4.4" fill="#1A0A2E"/>
+      <circle cx="12" cy="12" r="0.75" fill="#F2A800" opacity="0.95"/>
+      <circle cx="12" cy="10" r="0.6" fill="#F2A800" opacity="0.8"/>
+      <circle cx="13.7" cy="11" r="0.6" fill="#F2A800" opacity="0.8"/>
+      <circle cx="13.7" cy="13" r="0.6" fill="#F2A800" opacity="0.8"/>
+      <circle cx="12" cy="14" r="0.6" fill="#F2A800" opacity="0.8"/>
+      <circle cx="10.3" cy="13" r="0.6" fill="#F2A800" opacity="0.8"/>
+      <circle cx="10.3" cy="11" r="0.6" fill="#F2A800" opacity="0.8"/>
+    </svg>
+    <p class="couplet">You do not have to name it.<br>Just do not turn away.</p>
+    <form class="signup" data-placement="closing" novalidate>
+      <div class="signup-row">
+        <input type="email" name="email_address" placeholder="Your email" autocomplete="email" required aria-label="Email address">
+        <button type="submit">Send me Chapter One</button>
+      </div>
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="signup-note">Free. Unsubscribe anytime.</p>
+      <p class="signup-msg" role="status">Thank you. Check your inbox for Chapter One.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  © 2026 J.J. Blackburn · <em>The Sonflower and the Bear</em><br>
+  Your email is used only to send you Chapter One and news about the series. Never sold or shared.
+</footer>
+
+<script>
+/* ─────────────────────────────────────────────────────────────
+   EMAIL SIGNUPS → GoHighLevel
+   1. In GHL: Automation → Workflows → new workflow →
+      trigger "Inbound Webhook". Copy its URL and paste it below.
+   2. In that workflow: "Create/Update Contact" (map email),
+      then "Add Contact Tag" using the tag fields sent below.
+   Each signup sends: email, source tag, and which form was used
+   (hero / middle / closing), plus any UTM codes in the link.
+   Until the URL is set, forms show a notice instead of losing emails.
+   ───────────────────────────────────────────────────────────── */
+const GHL_WEBHOOK_URL = "";
+
+const SERIES_TAG = "The Sonflower and the Bear";   // every signup gets this tag
+const SOURCE_TAG = "src-thesonflower-site";        // where the lead came from
+
+const utm = {};
+new URLSearchParams(location.search).forEach((v, k) => { if (k.startsWith('utm_')) utm[k] = v; });
+
+document.querySelectorAll('.signup').forEach(form => {
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const input = form.querySelector('input[type=email]');
+    const btn = form.querySelector('button');
+    const msg = form.querySelector('.signup-msg');
+    const email = input.value.trim();
+
+    if (form.querySelector('.hp').value) return;               // bot
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      input.focus();
+      input.setCustomValidity('Please enter a valid email.');
+      input.reportValidity();
+      input.setCustomValidity('');
+      return;
+    }
+
+    if (!GHL_WEBHOOK_URL) {
+      console.warn('Signup not connected: set GHL_WEBHOOK_URL in index.html.');
+      msg.textContent = 'Signups open very soon. Please check back.';
+      form.classList.add('done');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    try {
+      await fetch(GHL_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          email,
+          source: SOURCE_TAG,
+          form_placement: 'form-' + form.dataset.placement,
+          series: SERIES_TAG,
+          tags: [SERIES_TAG, SOURCE_TAG, 'form-' + form.dataset.placement],
+          page: location.href,
+          ...utm
+        })
+      });
+      form.classList.add('done');
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Send me Chapter One';
+      msg.textContent = 'Something went wrong. Please try again.';
+      msg.style.display = 'block';
+    }
+  });
+});
+
+
+
+
+/* ─────────────────────────────────────────────────────────────
+   TRAILERS AT THE TOP OF THE PAGE
+   Plays The Heart, then The Storm, then loops, muted (browsers
+   block autoplay with sound). "Sound on" unmutes. Visitors can
+   jump to either trailer or pause. Files live in /video.
+   ───────────────────────────────────────────────────────────── */
+(function () {
+  const v = document.getElementById('heroVideo');
+  if (!v) return;
+  const phone = window.matchMedia('(max-width: 640px) and (orientation: portrait)').matches;
+  const TRAILERS = [
+    { name: 'The Heart', src: phone ? 'video/trailer-heart-mobile.mp4' : 'video/trailer-heart.mp4' },
+    { name: 'The Storm', src: phone ? 'video/trailer-storm-mobile.mp4' : 'video/trailer-storm.mp4' }
+  ];
+  const chips = document.querySelectorAll('.chip');
+  const soundBtn = document.getElementById('soundBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = 0;
+
+  function mark() {
+    chips.forEach(c => c.setAttribute('aria-pressed', String(Number(c.dataset.t) === current)));
+  }
+  function load(i, play) {
+    current = i;
+    v.src = TRAILERS[i].src;
+    mark();
+    if (play) v.play().catch(() => {});
+  }
+  function setPauseIcon() {
+    pauseBtn.setAttribute('aria-label', v.paused ? 'Play' : 'Pause');
+    pauseBtn.innerHTML = v.paused
+      ? '<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14l12-7z" fill="currentColor"/></svg>'
+      : '<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>';
+  }
+  function setSoundLabel() {
+    const on = !v.muted;
+    soundBtn.setAttribute('aria-pressed', String(on));
+    soundBtn.classList.toggle('sound-off', !on);
+    soundBtn.querySelector('.lbl').textContent = on ? 'Sound off' : 'Sound on';
+    soundBtn.querySelector('.waves').setAttribute('opacity', on ? '1' : '.35');
+  }
+
+  v.muted = true;
+  load(0, !reduced);
+
+  // When one trailer ends, play the other; after The Storm, back to The Heart.
+  v.addEventListener('ended', () => load((current + 1) % TRAILERS.length, true));
+  // Warm up the next file while the first plays.
+  v.addEventListener('playing', () => {
+    const next = TRAILERS[(current + 1) % TRAILERS.length].src;
+    if (!document.querySelector('link[data-next="' + next + '"]')) {
+      const l = document.createElement('link');
+      l.rel = 'prefetch'; l.href = next; l.dataset.next = next;
+      document.head.appendChild(l);
+    }
+  });
+  v.addEventListener('play', setPauseIcon);
+  v.addEventListener('pause', setPauseIcon);
+
+  chips.forEach(c => c.addEventListener('click', () => load(Number(c.dataset.t), true)));
+  soundBtn.addEventListener('click', () => {
+    v.muted = !v.muted;
+    if (v.paused) v.play().catch(() => {});
+    setSoundLabel();
+  });
+  pauseBtn.addEventListener('click', () => { v.paused ? v.play().catch(() => {}) : v.pause(); });
+
+  setSoundLabel();
+  setPauseIcon();
+})();
+</script>
 </body>
 </html>
