@@ -569,10 +569,9 @@ document.querySelectorAll('.signup').forEach(form => {
     btn.disabled = true;
     btn.textContent = 'Sending…';
     try {
-      await fetch(GHL_WEBHOOK_URL, {
+      const r = await fetch('/api/signup', {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
           source: SOURCE_TAG,
@@ -583,6 +582,7 @@ document.querySelectorAll('.signup').forEach(form => {
           ...utm
         })
       });
+      if (!r.ok) throw new Error('Signup failed: ' + r.status);
       form.classList.add('done');
     } catch (err) {
       btn.disabled = false;
