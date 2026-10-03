@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/:path((?!images/|video/|favicon|api/).+)", "destination": "/", "permanent": false }
+    { "source": "/:path((?!images/|video/|favicon|api/|confirmed).+)", "destination": "/", "permanent": false }
   ],
   "headers": [
     {
