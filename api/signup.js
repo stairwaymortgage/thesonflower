@@ -1,7 +1,7 @@
 // Relays email signups from index.html to the GoHighLevel inbound webhook
 // as real JSON (browsers can only send text/plain cross-site, which GHL
 // doesn't pick up). The page posts here; this posts to GHL.
-const GHL_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/ipRIuBMrlyPNaFSXDz3q/webhook-trigger/b3282945-cc26-4454-8f7e-6b4d1083a353";
+const GHL_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/ipRIuBMrlyPNaFSXDz3q/webhook-trigger/29339ed4-d513-40d2-95ef-c043f4756267";
 
 // Only pass on the fields the site sends.
 function pick(data, email) {
